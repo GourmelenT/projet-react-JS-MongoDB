@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>Information Cars</title>
+</head>
+<body>
+    <div class="container-grille">
+        <header>
+            <h1></h1>
+        </header>
+
+        <nav>
+            <ul class="liste-sidenav">
+                <li><a href="index.html">Descriptif des voitures</a></li>
+                <li><a href="#">Modèle le plus testé</a></li>
+                <li><a href="#">Nos objectifs 2023</a></li>
+                <li><a href="#">Ajouter un testeur</a></li>
+                <li><a href="#">Besoin d'aide ?</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <div class="container-caracteristics">
+                <div class="caroussel-car">
+                    <img src="" alt="" width="100%">
+                </div>
+
+                <div class="box-carac">
+                    <div class="carac">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="desc-car">
+                <h2>Description de la voiture</h2><br>
+                <p></p>
+            </div>
+            
+        </main>
+
+        <footer>
+            <p>Footer</p>
+        </footer>
+
+    </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    // Récupérer l'ID de la voiture depuis l'URL
+    var urlParams = new URLSearchParams(window.location.search);
+    var carId = urlParams.get('id');
+
+    // Effectuer une requête GET pour récupérer les informations de la voiture spécifique
+    fetch('http://localhost:3456/api/cars')
+        .then(function(response) {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Erreur de requête');
+        }
+        })
+        .then(function(cars) {
+        // Rechercher la voiture correspondant à l'ID
+        var car = cars.find(function(car) {
+            return car._id === carId;
+        });
+
+        if (car) {
+            // Mettre à jour les éléments HTML avec les informations de la voiture
+            var carTitle = document.querySelector('h1');
+            carTitle.textContent = car.marque + ' ' + car.modele;
+
+            var carImage = document.querySelector('.caroussel-car img');
+            carImage.src = car.photo_webp;
+            carImage.alt = car.modele;
+
+            var carInfos = document.querySelector('.box-carac .carac');
+            carInfos.innerHTML = `
+            <h3>Informations de la voiture</h3><br>
+            <p><strong>Numéro de références : </strong>${car.reference}</p>
+            <p><strong>Marque : </strong>${car.marque}</p>
+            <p><strong>Modèle : </strong>${car.modele}</p>
+            <p><strong>Type : </strong>${car.type}</p>
+            <p><strong>Année : </strong>${car.annee}</p>
+            <p><strong>Prix : </strong>${car.prix} €</p>
+            <p><strong>Couleur : </strong>${car.couleur}</p>
+            <p><strong>Carburant : </strong>${car.caracteristique.carburant}</p>
+            <p><strong>Boite de vitesse : </strong>${car.caracteristique.boite_vitesse}</p>
+            <p><strong>Nombre de portes : </strong>${car.caracteristique.nombre_portes}</p>
+            <p><strong>Nombre de places : </strong>${car.caracteristique.nombre_places}</p>
+            <p><strong>Puissance fiscale: </strong>${car.caracteristique.puissance_fiscale} cv</p>
+            <p><strong>Puissance DIN : </strong>${car.caracteristique.puissance_din} cv</p>
+            <p><strong>Vitesse maximale : </strong>${car.caracteristique.vitesse_maximale} km/h</p>
+            <p><strong>Acceleration : </strong>${car.caracteristique.acceleration} s/100km</p>
+            <p><strong>Consommation (mixte): </strong>${car.caracteristique.consommation}L/100</p>
+            `;
+
+            var carDescription = document.querySelector('.desc-car p');
+            carDescription.textContent = car.description;
+        } else {
+            console.error('Voiture non trouvée');
+        }
+        })
+        .catch(function(error) {
+        console.error(error);
+        });
+    });
+
+    </script>
+
+
+</body>
+</html>

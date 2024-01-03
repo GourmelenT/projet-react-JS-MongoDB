@@ -1,0 +1,6 @@
+# Ignore les fichiers de configuration npm
+**/package-lock.json
+**/package.json
+
+# Ignore les répertoires node_modules
+node_modules/

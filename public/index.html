@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="favicon.ico" type="image/x-icon">
+    <title>Testeurs</title>
+</head>
+
+<body>
+    <div class="container-grille">
+        <header>
+            <h1>Testons les voitures</h1>
+        </header>
+        <nav>
+            <ul class="liste-sidenav">
+                <li><a href="#">Descriptif des voitures</a></li>
+                <li><a href="#">Modèle le plus testé</a></li>
+                <li><a href="#">Nos objectifs 2023</a></li>
+                <li><a href="#">Ajouter un testeur</a></li>
+                <li><a href="#">Besoin d'aide ?</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <div id="root"></div>
+        </main>
+
+        <footer>
+            <p>Footer</p>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script src="app.js" type="text/babel"></script>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // Effectuer une requête GET pour récupérer les données des voitures
+        axios.get('http://localhost:3456/api/cars')
+        .then(function (response) {
+        // La réponse contient les données des voitures
+        var cars = response.data;
+
+        // Parcourir les voitures et générer le contenu HTML correspondant
+        var carContainer = document.querySelector('.container-car');
+        cars.forEach(function (car) {
+            var carElement = document.createElement('div');
+            carElement.className = 'bloc-car';
+            carElement.innerHTML = `
+            <div class="img-car">
+                <img src="${car.photo_png}" alt="${car.modele}" width="100%">
+            </div>
+            <div class="description-car">
+                <h3>${car.marque} ${car.modele}</h3>
+                <p>${car.caracteristique.boite_vitesse}</p>
+                <p>${car.caracteristique.carburant}</p>
+                <p>${car.caracteristique.consommation}L/100km</p>
+            </div>
+            `;
+            // Pour lier la voiture cliqué aux informations contenues dans le car-information.html
+            carElement.addEventListener('click', function() {
+                // Récupérer l'ID de la voiture correspondante
+                var carId = car._id;
+
+                // Rediriger vers la page car-information.html avec l'ID de la voiture en paramètre d'URL
+                window.location.href = 'car-information.html?id=' + carId;
+            });
+
+            carContainer.appendChild(carElement);
+        });
+        })
+        .catch(function (error) {
+            console.error(error);
+        });
+    </script> -->
+</body>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+</html>
